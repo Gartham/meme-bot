@@ -10,9 +10,10 @@ public class BotConfiguration {
 		memesChannel = cmdLineArguments.readString("682621944943738900", "--normal-channel", "--memes-channel", "-nc",
 				"-mc");
 		picker = cmdLineArguments.readString("682427503272525862", "--picker", "-p");
+		logChannel = cmdLineArguments.readString("958136662112743425", "--log-channel", "-lc");
 	}
 
-	private final String token, selectedMemesChannel, memesChannel, picker;
+	private final String token, selectedMemesChannel, memesChannel, picker, logChannel;
 
 	public String getToken() {
 		return token;
@@ -28,6 +29,10 @@ public class BotConfiguration {
 
 	public String getPicker() {
 		return picker;
+	}
+
+	public String getLogChannel() {
+		return logChannel;
 	}
 
 }

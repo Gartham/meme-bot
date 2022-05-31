@@ -14,7 +14,6 @@ import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import club.minnced.discord.webhook.send.WebhookMessage;
 import club.minnced.discord.webhook.send.WebhookMessageBuilder;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.Webhook;
@@ -36,7 +35,7 @@ public class Utilities {
 	 */
 	public static Webhook getFeasibleWebhook(TextChannel channel) {
 		for (Webhook wb : channel.retrieveWebhooks().complete())
-			if (wb.getOwner().getId().equals(channel.getJDA().getSelfUser().getId()))
+			if (wb.getOwner() != null && wb.getOwner().getId().equals(channel.getJDA().getSelfUser().getId()))
 				return wb;
 		byte[] b = new byte[5];
 		new Random().nextBytes(b);// 1/2^40 collision chance.
@@ -78,13 +77,13 @@ public class Utilities {
 		}
 	}
 
-	public static void sendAsCreature(Member creature, String message, EmbedBuilder embed, TextChannel channel) {
+	public static void sendAsCreature(User creature, String message, EmbedBuilder embed, TextChannel channel) {
 		if (message == null && embed == null)
 			throw null;
 
 		var wmb = new WebhookMessageBuilder();
 		wmb.setAvatarUrl(creature.getEffectiveAvatarUrl());
-		wmb.setUsername(creature.getEffectiveName());
+		wmb.setUsername(creature.getName());
 		if (message != null)
 			wmb.setContent(message);
 		if (embed != null)
@@ -102,11 +101,12 @@ public class Utilities {
 		});
 	}
 
-	public static void sendAsCreature(Member creature, EmbedBuilder embed, TextChannel channel) {
+	public static void sendAsCreature(User creature, EmbedBuilder embed, TextChannel channel) {
 		sendAsCreature(creature, null, embed, channel);
 	}
 
-	public static void sendAsCreature(Member creature, String message, TextChannel channel) {
+	public static void sendAsCreature(User creature, String message, TextChannel channel) {
 		sendAsCreature(creature, message, null, channel);
 	}
+
 }
