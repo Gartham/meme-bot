@@ -1,5 +1,6 @@
 package com.gartham.memebot;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -57,11 +58,13 @@ public class BotLauncher {
 					if (msg.getAttachments().size() == 1) {
 						Utilities.sendAsCreature(msg.getAuthor(),
 								new EmbedBuilder().setDescription("Meme by " + msg.getAuthor().getAsMention() + '.')
+										.setColor(new Color(0)).setTitle("[Link]", msg.getJumpUrl())
 										.setImage(msg.getAttachments().get(0).getUrl()),
 								jda.getTextChannelById(config.getSelectedMemesChannel()));
 						jda.getTextChannelById(config.getLogChannel()).sendMessage("meme-bot.v1: "
 								+ msg.getAuthor().getAsMention() + " - " + msg.getJumpUrl() + " - " + msg.getId())
 								.queue();
+						mre.getReaction().removeReaction(mre.getUser()).complete();
 						inc(score, msg.getAuthor().getId());
 						write(score);
 					}
