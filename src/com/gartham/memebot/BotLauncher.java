@@ -30,7 +30,8 @@ public class BotLauncher {
 	public static void main(String[] args) throws Throwable {
 		Map<String, Integer> score;
 		if (!SCORE_FILE.exists()) {
-			SCORE_FILE.getParentFile().mkdirs();
+			if (SCORE_FILE.getParentFile() != null)
+				SCORE_FILE.getParentFile().mkdirs();
 			score = new HashMap<>();
 		} else
 			try (InputStreamReader reader = new InputStreamReader(new FileInputStream(SCORE_FILE),
@@ -58,9 +59,8 @@ public class BotLauncher {
 								new EmbedBuilder().setDescription("Meme by " + msg.getAuthor().getAsMention() + '.')
 										.setImage(msg.getAttachments().get(0).getUrl()),
 								jda.getTextChannelById(config.getSelectedMemesChannel()));
-						jda.getTextChannelById(config.getLogChannel())
-								.sendMessage(
-										msg.getAuthor().getAsMention() + " - " + msg.getJumpUrl() + " - " + msg.getId())
+						jda.getTextChannelById(config.getLogChannel()).sendMessage("meme-bot.v1: "
+								+ msg.getAuthor().getAsMention() + " - " + msg.getJumpUrl() + " - " + msg.getId())
 								.queue();
 						inc(score, msg.getAuthor().getId());
 						write(score);
