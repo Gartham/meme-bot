@@ -1,2 +1,2 @@
-# bot template
- A template repository for Discord bot projects.
+# Meme Bot
+ A meme bot for Gartham's server.
