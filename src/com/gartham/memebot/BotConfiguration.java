@@ -6,7 +6,7 @@ public class BotConfiguration {
 
 	public BotConfiguration(CLIParams cmdLineArguments) {
 		token = cmdLineArguments.readString("", "--token");
-		selectedMemesChannel = cmdLineArguments.readString("682566378514939927", "--selected-memes-channel", "-smc");
+		selectedMemesChannel = cmdLineArguments.readString("981089997400731658", "--selected-memes-channel", "-smc");
 		memesChannel = cmdLineArguments.readString("682621944943738900", "--normal-channel", "--memes-channel", "-nc",
 				"-mc");
 		picker = cmdLineArguments.readString("682427503272525862", "--picker", "-p");
