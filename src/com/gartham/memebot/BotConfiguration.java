@@ -1,4 +1,4 @@
-package com.gartham.templates.discordbot;
+package com.gartham.memebot;
 
 import org.alixia.javalibrary.parsers.cli.CLIParams;
 

@@ -1,4 +1,4 @@
-package com.gartham.templates.discordbot;
+package com.gartham.memebot;
 
 import javax.security.auth.login.LoginException;
 
